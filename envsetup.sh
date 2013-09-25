@@ -134,6 +134,7 @@ function check_product()
 
     if (echo -n $1 | grep -q -e "^citrus_") ; then
        CITRUS_BUILD=$(echo -n $1 | sed -e 's/^citrus_//g')
+       export BUILD_NUMBER=$((date +%s%N ; echo $CITRUS_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
     else
        CITRUS_BUILD=
     fi

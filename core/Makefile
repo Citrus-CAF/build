@@ -2632,6 +2632,13 @@ ifdef BOARD_AVB_DTBO_KEY_PATH
 endif # BOARD_AVB_DTBO_KEY_PATH
 endif # BOARD_AVB_ENABLE
 endif # BOARD_PREBUILT_DTBOIMAGE
+
+ifdef PRODUCT_DEFAULT_DEV_CERTIFICATE
+	$(hide) vendor/citrus/build/tools/getb64key.py $(PRODUCT_DEFAULT_DEV_CERTIFICATE).x509.pem > $(zip_root)/META/releasekey.txt
+else
+	$(hide) vendor/citrus/build/tools/getb64key.py $(DEFAULT_SYSTEM_DEV_CERTIFICATE).x509.pem > $(zip_root)/META/releasekey.txt
+endif
+
 	@# The radio images in BOARD_PACK_RADIOIMAGES will be additionally copied from RADIO/ into
 	@# IMAGES/, which then will be added into <product>-img.zip. Such images must be listed in
 	@# INSTALLED_RADIOIMAGE_TARGET.

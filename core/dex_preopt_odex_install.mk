@@ -108,6 +108,14 @@ endif
 endif
 
 $(built_odex): PRIVATE_DEX_PREOPT_FLAGS := $(LOCAL_DEX_PREOPT_FLAGS)
+
+# Use pattern rule - we may have multiple installed odex files.
+# Ugly syntax - See the definition get-odex-file-path.
+$(installed_odex) : $(dir $(LOCAL_INSTALLED_MODULE))%$(notdir $(word 1,$(installed_odex))) \
+                  : $(dir $(LOCAL_BUILT_MODULE))%$(notdir $(word 1,$(built_odex))) \
+    | $(ACP)
+	@echo -e ${CL_CYN}"Install: $@"${CL_RST}
+	$(copy-file-to-target)
 endif
 
 # Add the installed_odex to the list of installed files for this module.

@@ -369,6 +369,8 @@ LOCAL_JAVA_LANGUAGE_VERSION:=
 LOCAL_IS_RUNTIME_RESOURCE_OVERLAY:=
 LOCAL_RRO_THEME:=
 
+LOCAL_IGNORE_SUBDIR:=
+
 # Trim MAKEFILE_LIST so that $(call my-dir) doesn't need to
 # iterate over thousands of entries every time.
 # Leave the current makefile to make sure we don't break anything

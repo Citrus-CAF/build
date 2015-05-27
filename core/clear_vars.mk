@@ -369,7 +369,8 @@ LOCAL_JAVA_LANGUAGE_VERSION:=
 LOCAL_IS_RUNTIME_RESOURCE_OVERLAY:=
 LOCAL_RRO_THEME:=
 
-LOCAL_IGNORE_SUBDIR:=
+# Include any vendor specific clear_vars.mk file
+-include $(TOPDIR)vendor/*/build/core/clear_vars.mk
 
 # Trim MAKEFILE_LIST so that $(call my-dir) doesn't need to
 # iterate over thousands of entries every time.

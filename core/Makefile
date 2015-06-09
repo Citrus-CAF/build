@@ -184,7 +184,7 @@ ifeq ($(TARGET_BUILD_VARIANT),user)
   ifeq "true" "$(DISPLAY_BUILD_NUMBER)"
     BUILD_DISPLAY_ID := $(BUILD_ID).$(BUILD_NUMBER) $(BUILD_KEYS)
   else
-    BUILD_DISPLAY_ID := $(BUILD_ID) $(BUILD_KEYS)
+    BUILD_DISPLAY_ID := $(BUILD_ID)
   endif
 else
   # Non-user builds should show detailed build information

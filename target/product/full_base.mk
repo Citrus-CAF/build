@@ -28,7 +28,7 @@ PRODUCT_PACKAGES := \
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.config.ringtone=Titania.ogg \
     ro.config.notification_sound=Tethys.ogg \
-    ro.config.alarm_alert=Osmium.ogg
+    ro.config.alarm_alert=Oxygen.ogg
 
 # Put en_US first in the list, so make it default.
 PRODUCT_LOCALES := en_US

@@ -1624,7 +1624,8 @@ class BlockDifference(object):
       script.AppendExtra('if range_sha1("%s", "%s") == "%s" then' % (
                          self.device, ranges_str,
                          self._HashZeroBlocks(self.tgt.extended.size())))
-      script.Print('Verified the updated %s image.' % (partition,))
+      script.Print(" ")
+      script.Print("Citrus-CAF has been Sweetened!.")
       if partition == "system":
         code = ErrorCode.SYSTEM_NONZERO_CONTENTS
       else:
@@ -1635,7 +1636,8 @@ class BlockDifference(object):
           'OTA update");\n'
           'endif;' % (code, partition))
     else:
-      script.Print('Verified the updated %s image.' % (partition,))
+      script.Print(" ")
+      script.Print("Citrus has been Sweetened!.")
 
     if partition == "system":
       code = ErrorCode.SYSTEM_UNEXPECTED_CONTENTS

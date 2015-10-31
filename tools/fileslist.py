@@ -15,7 +15,9 @@
 # limitations under the License.
 #
 
-import json, hashlib, operator, os, sys
+from __future__ import print_function
+
+import operator, os, sys
 
 def get_file_size(path):
   st = os.lstat(path)
@@ -51,8 +53,9 @@ def main(argv):
           output.append(row)
         except os.error:
           pass
-  output.sort(key=operator.itemgetter("Size", "Name"), reverse=True)
-  print json.dumps(output, indent=2, separators=(',',': '))
+  output.sort(key=operator.itemgetter(0), reverse=True)
+  for row in output:
+    print("%12d  %s" % row)
 
 if __name__ == '__main__':
   main(sys.argv)

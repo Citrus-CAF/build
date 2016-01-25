@@ -671,15 +671,43 @@ proto_sources_fullpath := $(addprefix $(LOCAL_PATH)/, $(proto_sources))
 proto_generated_cpps := $(addprefix $(proto_gen_dir)/, \
     $(patsubst %.proto,%.pb$(my_proto_source_suffix),$(proto_sources_fullpath)))
 
-# Ensure the transform-proto-to-cc rule is only defined once in multilib build.
-ifndef $(my_host)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined
-$(proto_generated_cpps): PRIVATE_PROTO_INCLUDES := $(TOP)
-$(proto_generated_cpps): PRIVATE_PROTOC_FLAGS := $(LOCAL_PROTOC_FLAGS) $(my_protoc_flags)
-$(proto_generated_cpps): PRIVATE_RENAME_CPP_EXT := $(my_rename_cpp_ext)
-$(proto_generated_cpps): $(proto_gen_dir)/%.pb$(my_proto_source_suffix): %.proto $(my_protoc_deps) $(PROTOC)
-	$(transform-proto-to-cc)
+define copy-proto-files
+$(if $(PRIVATE_PROTOC_OUTPUT), \
+   $(eval proto_generated_path := $(dir $(subst $(PRIVATE_PROTOC_INPUT),$(PRIVATE_PROTOC_OUTPUT),$@)))
+   @mkdir -p $(dir $(proto_generated_path))
+   @echo "Protobuf relocation: $@ => $(proto_generated_path)"
+   @cp -f $@ $(proto_generated_path) ,)
+endef
 
-$(my_host)$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined := true
+
+# Ensure the transform-proto-to-cc rule is only defined once in multilib build.
+ifndef $(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined
+$(proto_generated_sources): PRIVATE_PROTO_INCLUDES := $(TOP)
+$(proto_generated_sources): PRIVATE_PROTOC_FLAGS := $(LOCAL_PROTOC_FLAGS) $(my_protoc_flags)
+$(proto_generated_sources): PRIVATE_PROTOC_OUTPUT := $(LOCAL_PROTOC_OUTPUT)
+$(proto_generated_sources): PRIVATE_PROTOC_INPUT := $(LOCAL_PATH)
+$(proto_generated_sources): $(proto_generated_sources_dir)/%.pb$(my_proto_source_suffix): %.proto $(PROTOC)
+	$(transform-proto-to-cc)
+	$(copy-proto-files)
+
+# This is just a dummy rule to make sure gmake doesn't skip updating the dependents.
+$(proto_generated_headers): PRIVATE_PROTOC_OUTPUT := $(LOCAL_PROTOC_OUTPUT)
+$(proto_generated_headers): PRIVATE_PROTOC_INPUT := $(LOCAL_PATH)
+$(proto_generated_headers): $(proto_generated_sources_dir)/%.pb.h: $(proto_generated_sources_dir)/%.pb$(my_proto_source_suffix)
+	@echo "Updated header file $@."
+	$(hide) touch $@
+	$(copy-proto-files)
+
+$(my_prefix)_$(LOCAL_MODULE_CLASS)_$(LOCAL_MODULE)_proto_defined := true
+endif  # transform-proto-to-cc rule included only once
+
+$(proto_generated_objects): PRIVATE_ARM_MODE := $(normal_objects_mode)
+$(proto_generated_objects): PRIVATE_ARM_CFLAGS := $(normal_objects_cflags)
+$(proto_generated_objects): $(proto_generated_obj_dir)/%.o: $(proto_generated_sources_dir)/%$(my_proto_source_suffix) $(proto_generated_headers)
+ifeq ($(my_proto_source_suffix),.c)
+	$(transform-$(PRIVATE_HOST)c-to-o)
+else
+	$(transform-$(PRIVATE_HOST)cpp-to-o)
 endif
 # Ideally we can generate the source directly into $(intermediates).
 # But many Android.mks assume the .pb.hs are in $(generated_sources_dir).

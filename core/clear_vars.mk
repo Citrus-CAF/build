@@ -369,6 +369,8 @@ LOCAL_JAVA_LANGUAGE_VERSION:=
 LOCAL_IS_RUNTIME_RESOURCE_OVERLAY:=
 LOCAL_RRO_THEME:=
 
+LOCAL_PROTOC_OUTPUT:=
+
 # Include any vendor specific clear_vars.mk file
 -include $(TOPDIR)vendor/*/build/core/clear_vars.mk
 

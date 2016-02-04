@@ -253,7 +253,10 @@ def ProcessTargetFiles(input_tf_zip, output_tf_zip, misc_info,
       new_data = ReplaceCerts(data)
       common.ZipWriteStr(output_tf_zip, out_info, new_data)
 
-    # Trigger a rebuild of the recovery patch if needed.
+    elif info.filename.startswith("SYSTEM/etc/permissions/"):
+      print("rewriting %s with new keys." % info.filename)
+      new_data = ReplaceCerts(data)
+      common.ZipWriteStr(output_tf_zip, out_info, new_data)
     elif info.filename in ("SYSTEM/recovery-from-boot.p",
                            "SYSTEM/etc/recovery.img",
                            "SYSTEM/bin/install-recovery.sh"):
@@ -472,12 +475,7 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
                            "build/target/product/security/testkey")
     mapped_keys.append(
         OPTIONS.key_map.get(devkey, devkey) + ".x509.pem")
-<<<<<<< 41984f7d8e2ce0dbcdca34fffd83b4615f221059
-    print("META/otakeys.txt has no keys; using %s for OTA package"
-          " verification." % (mapped_keys[0],))
-=======
     print("META/otakeys.txt has no keys; using", mapped_keys[0])
->>>>>>> py3: update all the things
 
   # recovery uses a version of the key that has been slightly
   # predigested (by DumpPublicKey.java) and put in res/keys.

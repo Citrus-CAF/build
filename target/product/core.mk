@@ -35,6 +35,7 @@ PRODUCT_PACKAGES += \
     KeyChain \
     Keyguard \
     ManagedProvisioning \
+    PicoTts \
     PacProcessor \
     libpac \
     PrintSpooler \

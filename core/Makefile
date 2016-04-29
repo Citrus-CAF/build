@@ -1922,6 +1922,13 @@ bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CITRUS_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CITRUS_TARGET_PACKAGE) > $(CITRUS_TARGET_PACKAGE).md5sum
 	@echo -e ${CL_CYN}"Package Complete: $(CITRUS_TARGET_PACKAGE)"${CL_RST}
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CITRUS_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(CITRUS_TARGET_PACKAGE) > $(CITRUS_TARGET_PACKAGE).md5sum
+	@echo -e ${CL_BLD}${CL_CYN}"===============================-Package complete-==============================="${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(CITRUS_TARGET_PACKAGE)${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(CITRUS_TARGET_PACKAGE).md5sum | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Size:"${CL_YLW}" `du -sh $(CITRUS_TARGET_PACKAGE) | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_CYN}"================================================================================"${CL_RST}
 
 bootzip: bootimage
 	$(BOOT_ZIP_FROM_IMAGE_SCRIPT) \

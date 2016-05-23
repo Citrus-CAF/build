@@ -147,9 +147,11 @@ def get_from_manifest(device_name):
     for man in (custom_local_manifest, default_manifest):
         man = load_manifest(man)
         for local_path in man.findall("project"):
-            lp = local_path.get("path").strip('/')
-            if lp.startswith("device/") and lp.endswith("/" + device_name):
-                return lp
+            lp = local_path.get("path")
+            if lp is not None:
+                lp = local_path.get("path").strip('/')
+                if lp.startswith("device/") and lp.endswith("/" + device_name):
+                    return lp
     return None
 
 

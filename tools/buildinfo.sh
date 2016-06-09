@@ -58,6 +58,6 @@ if [ "$TARGET_UNIFIED_DEVICE" == "" ] ; then
 fi
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
 
-echo "ro.aospb.device=$AOSPB_DEVICE"
+echo "ro.citrus.device=$CITRUS_DEVICE"
 
 echo "# end build properties"

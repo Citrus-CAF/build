@@ -43,10 +43,10 @@ DEBUG = False
 default_manifest = ".repo/manifest.xml"
 
 custom_local_manifest = ".repo/local_manifests/citrus_manifest.xml"
-custom_default_revision = "mm6.0"
+custom_default_revision = "ctr6.0"
 custom_dependencies = "citrus.dependencies"
-org_manifest = "CITRUS"  # leave empty if org is provided in manifest
-org_display = "CITRUS"  # needed for displaying
+org_manifest = "Citrus-CAF"  # leave empty if org is provided in manifest
+org_display = "Citrus-CAF"  # needed for displaying
 
 github_auth = None
 

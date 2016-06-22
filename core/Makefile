@@ -1915,9 +1915,9 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 
 CITRUS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(CITRUS_MOD_VERSION).zip
 
-.PHONY: otapackage bacon bootzip
+.PHONY: otapackage lemonade bootzip
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
-bacon: otapackage
+lemonade: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CITRUS_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CITRUS_TARGET_PACKAGE) > $(CITRUS_TARGET_PACKAGE).md5sum
 	@echo -e ${CL_CYN}"Package Complete: $(CITRUS_TARGET_PACKAGE)"${CL_RST}

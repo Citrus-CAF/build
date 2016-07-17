@@ -648,11 +648,11 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     build = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
     date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
     model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
-    version = GetBuildProp("ro.mod.version", OPTIONS.info_dict)
+    flavour = GetBuildProp("ro.citrus.flavour", OPTIONS.info_dict)
 
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(model));
-    script.Print("	   Version: %s"%(version));
+    script.Print("	   Flavour: %s"%(flavour));
     script.Print("     Based on: %s"%(build));
     script.Print("     Compiled: %s"%(date));
     script.Print("***********************************************");

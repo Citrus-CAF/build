@@ -647,16 +647,26 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
     build = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
     date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
-    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
     flavour = GetBuildProp("ro.citrus.flavour", OPTIONS.info_dict)
 
+
+ if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:
+    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(model));
     script.Print("	   Flavour: %s"%(flavour));
     script.Print("     Based on: %s"%(build));
     script.Print("     Compiled: %s"%(date));
     script.Print("***********************************************");
-
+ else:
+    name = GetBuildProp("ro.product.name", OPTIONS.info_dict)
+    script.Print("***********************************************");
+    script.Print("           Citrus-CAF for %s"%(name));
+    script.Print("     Flavour: %s"%(flavour));
+    script.Print("     Based on: %s"%(build));
+    script.Print("     Compiled: %s"%(date));
+    script.Print("***********************************************");
+ 
   recovery_mount_options = OPTIONS.info_dict.get("recovery_mount_options")
 
   system_items = ItemSet("system", "META/filesystem_config.txt")
@@ -799,8 +809,8 @@ def GetBuildProp(prop, info_dict):
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
-    raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
-
+    print ("WARNING: could not find %s in build.prop" % (prop,))
+    return None
 
 def AddToKnownPaths(filename, known_paths):
   if filename[-1] == "/":

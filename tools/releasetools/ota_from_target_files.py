@@ -649,16 +649,15 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
     flavour = GetBuildProp("ro.citrus.flavour", OPTIONS.info_dict)
 
-
- if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:
+  if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:
     model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(model));
-    script.Print("	   Flavour: %s"%(flavour));
+    script.Print("     Flavour: %s"%(flavour));
     script.Print("     Based on: %s"%(build));
     script.Print("     Compiled: %s"%(date));
     script.Print("***********************************************");
- else:
+  else:
     name = GetBuildProp("ro.product.name", OPTIONS.info_dict)
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(name));
@@ -666,7 +665,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Print("     Based on: %s"%(build));
     script.Print("     Compiled: %s"%(date));
     script.Print("***********************************************");
- 
+
   recovery_mount_options = OPTIONS.info_dict.get("recovery_mount_options")
 
   system_items = ItemSet("system", "META/filesystem_config.txt")

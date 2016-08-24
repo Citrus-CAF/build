@@ -481,7 +481,10 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Comment("Stage 3/3")
 
   # Dump fingerprints
-  script.Print("Target: %s" % target_fp)
+  #script.Print("Target: %s" % target_fp)
+  script.Print("************************")
+  script.Print("     * Citrus-CAF *     ")
+  script.Print("************************")
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
@@ -557,6 +560,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     vendor_diff = common.BlockDifference("vendor", vendor_tgt)
     vendor_diff.WriteScript(script, output_zip)
 
+  script.Print(" ")
+  script.Print("Flashing Kernel..")
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 

@@ -1531,8 +1531,7 @@ endef
 # Explicitly delete the archive first so that ar doesn't
 # try to add to an existing archive.
 define transform-o-to-static-lib
-@echo -e ${CL_GRN}"target StaticLib:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
-@mkdir -p $(dir $@)
+@echo -e ${CL_GRN}"target StaticLib:"${CL_RST}" $(PRIVATE_MODULE) ($@)" @mkdir -p $(dir $@)
 @rm -f $@
 $(extract-and-include-target-whole-static-libs)
 $(call split-long-arguments,$($(PRIVATE_2ND_ARCH_VAR_PREFIX)TARGET_AR) \
@@ -2644,19 +2643,19 @@ endef
 
 # Copy a prebuilt file to a target location.
 define transform-prebuilt-to-target
-@echo -e ${CL_CYN}"$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
+@echo -e "$(if $(PRIVATE_IS_HOST_MODULE),host,target) "${CL_CYN}"Prebuilt:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target)
 endef
 
 # Copy a prebuilt file to a target location, using zipalign on it.
 define transform-prebuilt-to-target-with-zipalign
-@echo -e ${CL_CYN}"$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt APK:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
+@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) "${CL_CYN}"Prebuilt APK:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target-with-zipalign)
 endef
 
 # Copy a prebuilt file to a target location, stripping "# comment" comments.
 define transform-prebuilt-to-target-strip-comments
-@echo -e ${CL_CYN}"$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
+@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) "${CL_CYN}"Prebuilt:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target-strip-comments)
 endef
 

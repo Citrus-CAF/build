@@ -13,14 +13,6 @@ ANDROID_BUILD_PATHS := $(ABP)
 ANDROID_PREBUILTS := prebuilt/$(HOST_PREBUILT_TAG)
 ANDROID_GCC_PREBUILTS := prebuilts/gcc/$(HOST_PREBUILT_TAG)
 
-# Colorize Dumpvar
-  CL_RED=$(shell tput setaf 1)
-  CL_GRN=$(shell tput setaf 2)
-  CL_YLW=$(shell tput setaf 3)
-  CL_BLU=$(shell tput setaf 4)
-  CL_CYN=$(shell tput setaf 6)
-  CL_RST=$(shell tput sgr0)
-
 # The "dumpvar" stuff lets you say something like
 #
 #     CALLED_FROM_SETUP=true \
@@ -69,11 +61,12 @@ endif
 
 endif # CALLED_FROM_SETUP
 
+
 ifneq ($(PRINT_BUILD_CONFIG),)
 HOST_OS_EXTRA:=$(shell python -c "import platform; print(platform.platform())")
-$(info $(CL_CYN)================= Citrus-CAF =================$(CL_RST))
-$(info $(CL_YLW)|     Have fun building Tangy Marshmallow!   |$(CL_RST))
-$(info $(CL_CYN)================================+++===========$(CL_RST))
+$(info   ================= Citrus-CAF =================)
+$(info   |    Have fun building Tangy Marshmallow!    |)
+$(info   ================================+++===========)
 $(info   PLATFORM_VERSION_CODENAME=$(PLATFORM_VERSION_CODENAME))
 $(info   PLATFORM_VERSION=$(PLATFORM_VERSION))
 $(info   CITRUS_VERSION=$(CITRUS_VERSION))
@@ -101,5 +94,5 @@ $(info   HOST_OS_EXTRA=$(HOST_OS_EXTRA))
 $(info   HOST_BUILD_TYPE=$(HOST_BUILD_TYPE))
 $(info   BUILD_ID=$(BUILD_ID))
 $(info   OUT_DIR=$(OUT_DIR))
-$(info $(CL_CYN)=============================================$(CL_RST))
+$(info ===============================================)
 endif

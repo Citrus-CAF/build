@@ -23,7 +23,6 @@ PRODUCT_PACKAGES := \
 	Dialer \
 	EmulatorSmokeTests \
 	Fallback \
-	Gallery \
 	GestureBuilder \
 	Launcher3 \
 	LegacyCamera \

@@ -9,6 +9,8 @@ ifneq ($(BUILD_WITH_COLORS),0)
   CL_BLU="\033[34m"
   CL_MAG="\033[35m"
   CL_CYN="\033[36m"
+  CL_CITRUS="\033[38;5;24m"
+  CL_SGRY="\033[38;5;239m"
   CL_RST="\033[0m"
 endif
 
@@ -244,7 +246,7 @@ endif
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 			TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 			TARGET_DEVICE="$(TARGET_VENDOR_DEVICE_NAME)" \
-			SLIM_DEVICE="$(TARGET_DEVICE)" \
+			CITRUS_DEVICE="$(TARGET_DEVICE)" \
 			PRODUCT_NAME="$(TARGET_VENDOR_PRODUCT_NAME)" \
 			PRODUCT_BRAND="$(PRODUCT_BRAND)" \
 			PRODUCT_DEFAULT_LOCALE="$(call get-default-product-locale,$(PRODUCT_LOCALES))" \
@@ -2102,7 +2104,7 @@ endif
 ifeq ($(WITH_GMS),true)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
 else
-ifneq ($(SLIM_BUILD),)
+ifneq ($(CITRUS_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
@@ -2140,14 +2142,14 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE)
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
-SLIM_TARGET_PACKAGE := $(PRODUCT_OUT)/$(SLIM_MOD_VERSION).zip
+CITRUS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(CITRUS_MOD_VERSION).zip
 
 .PHONY: otapackage bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(SLIM_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(SLIM_TARGET_PACKAGE) > $(SLIM_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_CYN}"Package Complete: $(SLIM_TARGET_PACKAGE)"${CL_RST}
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CITRUS_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(CITRUS_TARGET_PACKAGE) > $(CITRUS_TARGET_PACKAGE).md5sum
+	@echo -e ${CL_CYN}"Package Complete: $(CITRUS_TARGET_PACKAGE)"${CL_RST}
 
 endif    # build_ota_package
 # -----------------------------------------------------------------

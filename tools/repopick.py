@@ -120,8 +120,8 @@ def fetch_query(remote_url, query):
         raise Exception('Gerrit URL should be in the form http[s]://hostname/ or ssh://[user@]host[:port]')
 
 if __name__ == '__main__':
-    # Default to SlimRoms Gerrit
-    default_gerrit = 'https://review.slimroms.org'
+    # Default to Citrus Gerrit
+    #default_gerrit = 'url'
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=textwrap.dedent('''\
         repopick.py is a utility to simplify the process of cherry picking

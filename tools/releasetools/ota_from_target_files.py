@@ -516,6 +516,20 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
+    aosprev = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
+    cafrev = GetBuildProp("ro.caf.revision", OPTIONS.info_dict)    
+    date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
+    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
+    version = GetBuildProp("ro.citrus.version", OPTIONS.info_dict)
+
+    script.Print("***********************************************");
+    script.Print("           Citrus-CAF for %s"%(model));
+    script.Print("	   Citrus-CAF Version: %s"%(version));
+    script.Print("     AOSP Revision: %s"%(aosprev));
+    script.Print("     CAF Revision: %s"%(cafrev));    
+    script.Print("     Compiled on: %s"%(date));
+    script.Print("***********************************************");
+
   recovery_mount_options = OPTIONS.info_dict.get("recovery_mount_options")
 
   script.ShowProgress(system_progress, 0)

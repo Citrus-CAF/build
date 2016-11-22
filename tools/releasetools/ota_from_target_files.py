@@ -519,11 +519,22 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     aosprev = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
     cafrev = GetBuildProp("ro.caf.revision", OPTIONS.info_dict)    
     date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
-    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
     version = GetBuildProp("ro.citrus.version", OPTIONS.info_dict)
 
+
+  if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:
+    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(model));
+    script.Print("	   Citrus-CAF Version: %s"%(version));
+    script.Print("     AOSP Revision: %s"%(aosprev));
+    script.Print("     CAF Revision: %s"%(cafrev));    
+    script.Print("     Compiled on: %s"%(date));
+    script.Print("***********************************************");
+  else:
+    name = GetBuildProp("ro.product.name", OPTIONS.info_dict)
+    script.Print("***********************************************");
+    script.Print("           Citrus-CAF for %s"%(name));
     script.Print("	   Citrus-CAF Version: %s"%(version));
     script.Print("     AOSP Revision: %s"%(aosprev));
     script.Print("     CAF Revision: %s"%(cafrev));    
@@ -618,7 +629,8 @@ def GetBuildProp(prop, info_dict):
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
-    raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+    print ("WARNING: could not find %s in build.prop" % (prop,))
+  return None
 
 
 def HandleDowngradeMetadata(metadata):

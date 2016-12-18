@@ -254,7 +254,7 @@ class TargetFiles(object):
             fullname = os.path.join(dirpath, fn)
             displayname = fullname[len(d)+1:]
             apk = APK(fullname, displayname)
-            self.apks[apk.package] = apk
+            self.apks[apk.filename] = apk
             self.apks_by_basename[os.path.basename(apk.filename)] = apk
 
             self.max_pkg_len = max(self.max_pkg_len, len(apk.package))
@@ -315,7 +315,7 @@ class TargetFiles(object):
     order = [(-len(v), k) for (k, v) in iteritems(by_cert)]
     order.sort()
 
-    for _, cert in order:
+   for _, cert in order:
       print("%s:" % ALL_CERTS.Get(cert))
       apks = by_cert[cert]
       apks.sort()

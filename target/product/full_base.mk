@@ -21,9 +21,9 @@
 
  # Additional settings used in all AOSP builds
  PRODUCT_PROPERTY_OVERRIDES := \
-    ro.config.ringtone=Titania.ogg \
-    ro.config.notification_sound=Tethys.ogg
- 
+    ro.config.ringtone=Zen.ogg \
+    ro.config.notification_sound=Chime.ogg
+
 PRODUCT_PACKAGES := \
     libfwdlockengine \
     WAPPushManager

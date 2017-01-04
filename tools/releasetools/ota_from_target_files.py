@@ -746,7 +746,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(model));
     script.Print("     Flavour: %s"%(flavour));
-    script.Print("     CAF Branch: %s"%(caf));
+    script.Print("     CAF Revision: %s"%(caf));
     script.Print("     AOSP Version: %s"%(build));
     script.Print("     Compiled: %s"%(date));
     script.Print("***********************************************");

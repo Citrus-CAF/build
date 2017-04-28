@@ -18,6 +18,7 @@
 #
 
 # skip api check for PDK buid
+ifeq ($(FORCE_CHECK_API),true)
 ifeq (,$(filter true, $(WITHOUT_CHECK_API) $(TARGET_BUILD_PDK)))
 
 .PHONY: checkapi
@@ -162,4 +163,5 @@ update-test-api: $(INTERNAL_PLATFORM_TEST_API_FILE) | $(ACP)
 	$(hide) $(ACP) $(INTERNAL_PLATFORM_TEST_REMOVED_API_FILE) frameworks/base/api/test-removed.txt
 
 
+endif
 endif

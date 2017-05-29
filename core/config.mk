@@ -190,7 +190,7 @@ FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(OUT_DIR) $(SCAN_EXCLUDE_DIRS) .r
 $(call project-set-path-variant,recovery,RECOVERY_VARIANT,bootable/recovery)
 
 -include vendor/extra/BoardConfigExtra.mk
--include vendor/slim/config/BoardConfigSLIM.mk
+-include vendor/citrus/config/BoardConfigaCitrus.mk
 
 # The build system exposes several variables for where to find the kernel
 # headers:
@@ -658,12 +658,6 @@ else
   DEFAULT_SYSTEM_DEV_CERTIFICATE := build/target/product/security/testkey
 endif
 
-# Rules for QCOM targets
-include vendor/slim/build/core/qcom_target.mk
-
-# Rules for MTK targets
-include vendor/slim/build/core/mtk_target.mk
-
 # ###############################################################
 # Set up final options.
 # ###############################################################
@@ -916,10 +910,10 @@ ifneq ($(TARGET_COPY_FILES_OVERRIDES),)
     PRODUCT_COPY_FILES := $(filter-out $(TARGET_COPY_FILES_OVERRIDES), $(PRODUCT_COPY_FILES))
 endif
 
-ifneq ($(SLIM_BUILD),)
+ifneq ($(CITRUS_BUILD),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
-$(eval include vendor/slim/sepolicy/sepolicy.mk)
+$(eval include vendor/citrus/sepolicy/sepolicy.mk)
 
 # Include any vendor specific config.mk file
 -include $(TOPDIR)vendor/*/build/core/config.mk

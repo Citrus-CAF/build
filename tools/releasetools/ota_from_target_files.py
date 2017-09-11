@@ -511,7 +511,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     build = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
     date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
     flavour = GetBuildProp("ro.citrus.flavour", OPTIONS.info_dict)
-    caf = GetBuildProp("ro.caf.branch", OPTIONS.info_dict)
+    caf = GetBuildProp("ro.caf.revision", OPTIONS.info_dict)
 
 
   if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:

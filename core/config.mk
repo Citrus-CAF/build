@@ -186,7 +186,7 @@ include $(BUILD_SYSTEM)/envsetup.mk
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(OUT_DIR) $(SCAN_EXCLUDE_DIRS) .repo .git)
 
 -include vendor/extra/BoardConfigExtra.mk
--include vendor/citrus/config/BoardConfigaCitrus.mk
+-include vendor/citrus/config/BoardConfigCitrus.mk
 
 # The build system exposes several variables for where to find the kernel
 # headers:

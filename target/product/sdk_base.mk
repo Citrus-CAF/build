@@ -99,7 +99,6 @@ PRODUCT_COPY_FILES := \
 
 include $(SRC_TARGET_DIR)/product/emulator.mk
 
-$(call inherit-product-if-exists, vendor/citrus/prebuilt/common/media/MaterialSounds/GoogleAudio.mk)
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/dancing-script/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/carrois-gothic-sc/fonts.mk)

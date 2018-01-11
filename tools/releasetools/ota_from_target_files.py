@@ -526,7 +526,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(model));
-    script.Print("	   Citrus-CAF Version: %s"%(version));
+    script.Print("     Version: %s"%(version));
     script.Print("     AOSP Revision: %s"%(aosprev));
     script.Print("     CAF Revision: %s"%(cafrev));    
     script.Print("     Compiled on: %s"%(date));
@@ -535,7 +535,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     name = GetBuildProp("ro.product.name", OPTIONS.info_dict)
     script.Print("***********************************************");
     script.Print("           Citrus-CAF for %s"%(name));
-    script.Print("	   Citrus-CAF Version: %s"%(version));
+    script.Print("     Version: %s"%(version));
     script.Print("     AOSP Revision: %s"%(aosprev));
     script.Print("     CAF Revision: %s"%(cafrev));    
     script.Print("     Compiled on: %s"%(date));

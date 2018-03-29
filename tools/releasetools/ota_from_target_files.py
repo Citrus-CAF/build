@@ -559,7 +559,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
     aosprev = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
-    cafrev = GetBuildProp("ro.caf.revision", OPTIONS.info_dict)    
+    cafrev = GetBuildProp("ro.caf.revision", OPTIONS.info_dict)
     date = GetBuildProp("ro.build.date", OPTIONS.info_dict)
     version = GetBuildProp("ro.citrus.version", OPTIONS.info_dict)
 
@@ -570,7 +570,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Print("           Citrus-CAF for %s"%(model));
     script.Print("     Version: %s"%(version));
     script.Print("     AOSP Revision: %s"%(aosprev));
-    script.Print("     CAF Revision: %s"%(cafrev));    
+    script.Print("     CAF Revision: %s"%(cafrev));
     script.Print("     Compiled on: %s"%(date));
     script.Print("***********************************************");
   else:
@@ -579,7 +579,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Print("           Citrus-CAF for %s"%(name));
     script.Print("     Version: %s"%(version));
     script.Print("     AOSP Revision: %s"%(aosprev));
-    script.Print("     CAF Revision: %s"%(cafrev));    
+    script.Print("     CAF Revision: %s"%(cafrev));
     script.Print("     Compiled on: %s"%(date));
     script.Print("***********************************************");
 
@@ -633,8 +633,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Mount("/system")
   script.RunCleanCache()
   script.Unmount("/system")
-    script.ShowProgress(0.05, 5)
-    script.WriteRawImage("/boot", "boot.img")
+
+  script.ShowProgress(0.05, 5)
+  script.WriteRawImage("/boot", "boot.img")
 
   script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
